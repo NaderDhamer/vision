@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parallax Homepage with Linked Carousels</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav id="navbar">
+  <div class="logo"><img src="images/logo.png" alt="Logo" style="max-height:52px; padding:4px 0; object-fit:contain; background:transparent; display:block;"></div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME: Main Carousel + Mini Carousel (Bootstrap) -->
+  <section class="carousel-container" id="home">
+    <div id="mainCarousel" class="carousel slide carousel-fade w-100 h-100" data-bs-ride="carousel">
+      <!-- Carousel text overlay -->
+      <div id="carousel-text-overlay" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:15;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;width:100%;">
+        <span id="carousel-main-title" style="font-size:2.5rem;font-weight:bold;text-shadow:0 2px 8px #000;">wp1</span>
+        <span id="carousel-subtitle" style="font-size:1.3rem;margin-top:0.7em;text-shadow:0 2px 8px #000;">Your subtitle here</span>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/wp1.jpg" class="d-block w-100" style="height:100vh;object-fit:cover;" alt="Image 1">
+        </div>
+        <div class="carousel-item">
+          <img src="images/wp2.jpg" class="d-block w-100" style="height:100vh;object-fit:cover;" alt="Image 2">
+        </div>
+        <div class="carousel-item">
+          <img src="images/wp3.jpg" class="d-block w-100" style="height:100vh;object-fit:cover;" alt="Image 3">
+        </div>
+        <div class="carousel-item">
+          <img src="images/wp4.jpg" class="d-block w-100" style="height:100vh;object-fit:cover;" alt="Image 4">
+        </div>
+        <div class="carousel-item">
+          <img src="images/wp5.jpg" class="d-block w-100" style="height:100vh;object-fit:cover;" alt="Image 5">
+        </div>
+        <div class="carousel-item">
+          <img src="images/wp6.jpg" class="d-block w-100" style="height:100vh;object-fit:cover;" alt="Image 6">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- Custom Thumbnail Navigation -->
+    <div class="custom-thumbnails-wrapper">
+      <button class="thumb-arrow left" aria-label="Previous thumbnails">&#8592;</button>
+      <div class="custom-thumbnails">
+        <img src="images/wp1.jpg" class="thumb-img active" data-bs-slide-to="0" alt="Thumb 1">
+        <img src="images/wp2.jpg" class="thumb-img" data-bs-slide-to="1" alt="Thumb 2">
+        <img src="images/wp3.jpg" class="thumb-img" data-bs-slide-to="2" alt="Thumb 3">
+        <img src="images/wp4.jpg" class="thumb-img" data-bs-slide-to="3" alt="Thumb 4">
+        <img src="images/wp5.jpg" class="thumb-img" data-bs-slide-to="4" alt="Thumb 5">
+        <img src="images/wp6.jpg" class="thumb-img" data-bs-slide-to="5" alt="Thumb 6">
+      </div>
+      <button class="thumb-arrow right" aria-label="Next thumbnails">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- Parallax Sections -->
+  <section class="parallax bg2" id="about">About Us</section>
+  <section class="parallax bg3" id="contact">Contact</section>
+  <!-- New parallax sections -->
+  <section class="parallax bg4" id="section4">Section 4</section>
+  <section class="parallax bg5" id="section5">Section 5</section>
+  <section class="parallax bg6" id="section6">Section 6</section>
+  <section class="parallax bg7" id="section7">Section 7</section>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Link JavaScript -->
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Thumbnail navigation logic
+      const thumbs = document.querySelectorAll('.thumb-img');
+      const carousel = document.getElementById('mainCarousel');
+      let thumbStart = 0;
+      const thumbVisible = 3;
+      function updateThumbs() {
+        thumbs.forEach((img, i) => {
+          if (i >= thumbStart && i < thumbStart + thumbVisible) {
+            img.style.display = 'block';
+          } else {
+            img.style.display = 'none';
+          }
+        });
+      }
+      updateThumbs();
+      document.querySelector('.thumb-arrow.left').onclick = function() {
+  thumbStart = Math.max(0, thumbStart - 1);
+  updateThumbs();
+  // Move carousel to the first visible thumbnail
+  var carouselInstance = bootstrap.Carousel.getOrCreateInstance(carousel);
+  carouselInstance.to(thumbStart);
+  // Update carousel text overlay
+  var mainTitle = document.getElementById('carousel-main-title');
+  if (mainTitle) mainTitle.textContent = 'wp' + (thumbStart + 1);
+      };
+      document.querySelector('.thumb-arrow.right').onclick = function() {
+  thumbStart = Math.min(thumbs.length - thumbVisible, thumbStart + 1);
+  updateThumbs();
+  // Move carousel to the first visible thumbnail
+  var carouselInstance = bootstrap.Carousel.getOrCreateInstance(carousel);
+  carouselInstance.to(thumbStart);
+  // Update carousel text overlay
+  var mainTitle = document.getElementById('carousel-main-title');
+  if (mainTitle) mainTitle.textContent = 'wp' + (thumbStart + 1);
+      };
+      thumbs.forEach((img, i) => {
+        img.onclick = function() {
+          var carouselInstance = bootstrap.Carousel.getOrCreateInstance(carousel);
+          carouselInstance.to(i);
+          thumbs.forEach(t => t.classList.remove('active'));
+          img.classList.add('active');
+          // Update carousel text overlay
+      var mainTitle = document.getElementById('carousel-main-title');
+      if (mainTitle) mainTitle.textContent = 'wp' + (i + 1);
+        };
+      });
+      carousel.addEventListener('slide.bs.carousel', function(e) {
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumbs[e.to].classList.add('active');
+        // Auto-scroll thumbnails if needed
+        if (e.to < thumbStart) {
+          thumbStart = e.to;
+          updateThumbs();
+        } else if (e.to >= thumbStart + thumbVisible) {
+          thumbStart = e.to - thumbVisible + 1;
+          updateThumbs();
+        }
+        // Update carousel text overlay
+      var mainTitle = document.getElementById('carousel-main-title');
+      if (mainTitle) mainTitle.textContent = 'wp' + (e.to + 1);
+      });
+    });
+    </script>
+</body>
+</html>
