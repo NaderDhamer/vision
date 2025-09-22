@@ -6,6 +6,8 @@
   <title>Parallax Homepage with Linked Carousels</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- tiny-slider CSS (lightweight slider for thumbnails) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
   <!-- Link CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -79,7 +81,74 @@
 
   <!-- Parallax Sections -->
   <section class="parallax bg2" id="about">About Us</section>
-  <section class="parallax bg3" id="Events">New & Events</section>
+  <section class="parallax bg3" id="Events">New & Events
+<!-- Thumbnail row: image + text + button -->
+      <div class="container mt-4">
+        <!-- tiny-slider container -->
+        <div id="thumbsSlider" class="thumbs-slider">
+          <div class="thumb-item">
+            <div class="card events-thumb text-center mx-2">
+              <img src="images/wp1.jpg" class="card-img-top" alt="Thumb 1">
+              <div class="card-body">
+                <p class="card-text">Short description for thumb 1.</p>
+                <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+          <div class="thumb-item">
+            <div class="card events-thumb text-center mx-2">
+              <img src="images/wp2.jpg" class="card-img-top" alt="Thumb 2">
+              <div class="card-body">
+                <p class="card-text">Short description for thumb 2.</p>
+                <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+          <div class="thumb-item">
+            <div class="card events-thumb text-center mx-2">
+              <img src="images/wp3.jpg" class="card-img-top" alt="Thumb 3">
+              <div class="card-body">
+                <p class="card-text">Short description for thumb 3.</p>
+                <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+          <div class="thumb-item">
+            <div class="card events-thumb text-center mx-2">
+              <img src="images/wp4.jpg" class="card-img-top" alt="Thumb 4">
+              <div class="card-body">
+                <p class="card-text">Short description for thumb 4.</p>
+                <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+          <div class="thumb-item">
+            <div class="card events-thumb text-center mx-2">
+              <img src="images/wp5.jpg" class="card-img-top" alt="Thumb 5">
+              <div class="card-body">
+                <p class="card-text">Short description for thumb 5.</p>
+                <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+          <div class="thumb-item">
+            <div class="card events-thumb text-center mx-2">
+              <img src="images/wp6.jpg" class="card-img-top" alt="Thumb 6">
+              <div class="card-body">
+                <p class="card-text">Short description for thumb 6.</p>
+                <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-2 gap-3">
+          <button id="thumbsPrev" class="thumb-arrow" aria-label="Previous thumbnails">&#8592;</button>
+          <button id="thumbsNext" class="thumb-arrow" aria-label="Next thumbnails">&#8594;</button>
+        </div>
+      </div>
+
+  </section>
+      
   <!-- New parallax sections -->
   <section class="parallax bg4" id="activities">Activities</section>
   <section class="parallax bg5" id="sab-members">SAB Members</section>
@@ -88,6 +157,8 @@
 
   <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- tiny-slider JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
   <!-- Link JavaScript -->
   <script src="js/script.js"></script>
   

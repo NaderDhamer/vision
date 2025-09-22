@@ -257,3 +257,57 @@ html, body {
   .footer-inner {flex-direction:column; align-items:center; text-align:center}
   .footer-brand, .footer-links, .footer-contact {width:100%}
 }
+
+/* Events thumbnails (cards) */
+.events-thumb {background: rgba(0,0,0,0.35); border: none;}
+.events-thumb .card-body {padding:12px}
+.events-thumb img {height:160px; object-fit:cover}
+.events-thumb .btn-outline-light {border-color: rgba(255,255,255,0.6); color: #fff}
+.events-thumb .btn-outline-light:hover {background: rgba(255,255,255,0.08)}
+
+@media (max-width:720px){
+  .events-thumb img {height:180px}
+}
+
+/* Ensure carousel-inner background transparent for thumbnail carousel */
+#thumbsCarousel .carousel-inner {background: transparent}
+#thumbsCarousel .card {background: rgba(0,0,0,0.35);}
+
+@media (max-width:576px){
+  #thumbsCarousel .card {background: rgba(0,0,0,0.18)}
+}
+
+/* Multi-visible carousel (show multiple items while sliding one at a time) */
+#thumbsCarousel .carousel-inner {
+  display: flex;
+  gap: 12px;
+}
+#thumbsCarousel .carousel-item {
+  flex: 0 0 33.3333%; /* default: 3 items per view */
+  display: flex;
+  justify-content: center;
+}
+#thumbsCarousel .carousel-item .card {width: 100%;}
+
+@media (max-width:992px){
+  #thumbsCarousel .carousel-item {flex: 0 0 50%;} /* 2 per view */
+}
+@media (max-width:576px){
+  #thumbsCarousel .carousel-item {flex: 0 0 100%;} /* 1 per view */
+}
+
+/* Prevent default transform hiding of non-active items so multiple are visible */
+#thumbsCarousel .carousel-item-next,
+#thumbsCarousel .carousel-item-prev,
+#thumbsCarousel .carousel-item.active {
+  transform: translateX(0);
+}
+
+/* Override Bootstrap's default .carousel-item display:none rule for this custom multi-visible carousel */
+#thumbsCarousel .carousel-item { display: block !important; }
+
+/* Make controls more visible on parallax */
+#thumbsCarousel .carousel-control-prev-icon,
+#thumbsCarousel .carousel-control-next-icon {
+  filter: invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}

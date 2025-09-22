@@ -133,4 +133,40 @@ document.addEventListener('DOMContentLoaded', function() {
     yearEl.textContent = new Date().getFullYear();
   })();
 
+  // ---------- tiny-slider thumbnail carousel initialization ----------
+  (function initTinyThumbs() {
+    const thumbsContainer = document.getElementById('thumbsSlider');
+    if (!thumbsContainer) return;
+
+    // Only initialize if tiny-slider is loaded
+    if (typeof tns !== 'function') {
+      // If tiny-slider isn't available, bail out gracefully
+      console.warn('tiny-slider not loaded: thumbnail slider disabled');
+      return;
+    }
+
+    const slider = tns({
+      container: '#thumbsSlider',
+      items: 3,
+      slideBy: 1,
+      gutter: 12,
+      controls: false,
+      nav: false,
+      mouseDrag: true,
+      swipeAngle: false,
+      speed: 400,
+      autoplay: false,
+      responsive: {
+        0: { items: 1 },
+        576: { items: 2 },
+        992: { items: 3 }
+      }
+    });
+
+    const prevBtn = document.getElementById('thumbsPrev');
+    const nextBtn = document.getElementById('thumbsNext');
+    if (prevBtn) prevBtn.addEventListener('click', () => slider.goTo('prev'));
+    if (nextBtn) nextBtn.addEventListener('click', () => slider.goTo('next'));
+  })();
+
 });
