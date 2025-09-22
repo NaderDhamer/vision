@@ -10,9 +10,18 @@ document.addEventListener('DOMContentLoaded', function() {
   (function setStickyNavbar() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return; // guard
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    // Use a passive scroll listener combined with requestAnimationFrame to avoid jank
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          navbar.classList.toggle('scrolled', window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
   })();
 
   // ---------- Bootstrap Carousel <-> Custom Thumbnails Linking ----------

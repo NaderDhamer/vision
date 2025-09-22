@@ -267,16 +267,21 @@ html, body {
 }
 .thumb-img.active {
   border-color: #ffd700;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.35), 0 2px 0 #fff inset;
-  transform: perspective(400px) rotateY(0deg) scale(1.18);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28), 0 1px 0 #fff inset;
+  transform: perspective(400px) rotateY(0deg) scale(1.12);
   opacity: 1;
   z-index: 2;
 }
 .thumb-img:hover {
-  transform: perspective(400px) rotateY(0deg) scale(1.08);
-  box-shadow: 0 12px 48px rgba(0,0,0,0.35), 0 2px 0 #fff inset;
+  transform: perspective(400px) rotateY(0deg) scale(1.04);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28), 0 1px 0 #fff inset;
   opacity: 1;
 }
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
 .thumb-arrow {
   background: #fff;
   border: none;
@@ -332,6 +337,11 @@ html, body {
   background: rgba(0,0,0,0.35);
   border-radius: 8px;
   pointer-events: none;
+}
+
+/* Disable parallax fixed background on narrower screens to improve scroll performance */
+@media (max-width: 992px) {
+  .parallax { background-attachment: scroll; }
 }
 
 @media (max-width:720px){
