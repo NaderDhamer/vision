@@ -178,4 +178,52 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nextBtn) nextBtn.addEventListener('click', () => slider.goTo('next'));
   })();
 
+  // ---------- Reveal only Events items (one-time) with stagger ----------
+  (function revealEventItems() {
+    const items = document.querySelectorAll('.item-reveal');
+    if (!items.length) return;
+
+    // Respect user preference for reduced motion
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Stagger amount in milliseconds between items
+    const STAGGER_MS = 100;
+
+    if (!('IntersectionObserver' in window) || prefersReduced) {
+      // If no IntersectionObserver or reduced motion is requested, reveal immediately without staggering
+      items.forEach(i => i.classList.add('in-view'));
+      return;
+    }
+
+    const obs = new IntersectionObserver((entries, o) => {
+      // Filter only the intersecting entries and process them in DOM order
+      const visible = entries.filter(e => e.isIntersecting).sort((a, b) => {
+        return Array.prototype.indexOf.call(items, a.target) - Array.prototype.indexOf.call(items, b.target);
+      });
+
+      visible.forEach(entry => {
+        const el = entry.target;
+        // Calculate delay based on the element's index among all .item-reveal elements
+        const idx = Array.prototype.indexOf.call(items, el);
+        const delay = STAGGER_MS * idx;
+
+        // Apply inline transition delay so CSS transition staggers
+        el.style.transitionDelay = delay + 'ms';
+
+        // Trigger reveal and unobserve for one-time animation
+        el.classList.add('in-view');
+        o.unobserve(el);
+
+        // Cleanup the inline style after transition completes
+        const cleanup = () => {
+          el.style.transitionDelay = '';
+          el.removeEventListener('transitionend', cleanup);
+        };
+        el.addEventListener('transitionend', cleanup);
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+
+    items.forEach(i => obs.observe(i));
+  })();
+
 });

@@ -387,6 +387,11 @@ html, body {
 .events-thumb .btn-outline-light {border-color: rgba(255,255,255,0.6); color: #fff}
 .events-thumb .btn-outline-light:hover {background: rgba(255,255,255,0.08)}
 
+/* Item-only reveal animation for events thumbnails */
+.item-reveal { opacity: 0; transform: translateY(14px); transition: opacity 900ms cubic-bezier(.22,.9,.18,1), transform 900ms cubic-bezier(.22,.9,.18,1); will-change: opacity, transform; }
+.item-reveal.in-view { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .item-reveal { transition: none; transform: none; } }
+
 @media (max-width:720px){
   .events-thumb img {height:180px}
 }
