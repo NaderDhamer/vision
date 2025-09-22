@@ -1,6 +1,9 @@
 * {margin:0; padding:0; box-sizing:border-box;}
 body {font-family: Arial, sans-serif; overflow-x:hidden;}
 
+/* Make images responsive by default */
+img { max-width: 100%; height: auto; display: block; }
+
 /* Sticky Navbar */
 nav {
   position: fixed;
@@ -36,7 +39,7 @@ html, body {
 }
 .carousel-container {
   position: relative;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   height: 100vh;
   display: flex;
@@ -44,15 +47,29 @@ html, body {
   justify-content: center;
   align-items: center;
   background: #111;
-  overflow: hidden;
+  /* allow hero carousel to break out to full-bleed */
+  overflow: visible;
+  /* leave space for the fixed navbar */
+  padding-top: 64px; /* adjust if navbar height changes */
+}
+
+/* Ensure the section that contains the main carousel doesn't constrain its children */
+#home {
+  position: relative;
+  width: 100%;
+  padding: 0; /* remove any extra padding that could limit full-bleed */
+  margin: 0;
 }
 .carousel {
   position: relative;
-  width: 80%;
-  height: 70%;
+  width: 100%;
+  height: auto;
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
+
+/* Constrain non-main carousels to a max width */
+.carousel:not(#mainCarousel) { max-width: 1100px; }
 .carousel.full-section {
   width: 100vw;
   height: 100vh;
@@ -67,7 +84,7 @@ html, body {
 }
 .carousel img {
   min-width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -88,6 +105,74 @@ html, body {
   opacity: 1;
   pointer-events: auto;
   z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .carousel { max-width: 720px; }
+  .carousel img { max-height: 60vh; }
+}
+
+/* Responsive thumbnails behavior */
+@media (max-width: 992px) {
+  .custom-thumbnails-wrapper { bottom: 24px; padding: 8px 14px; }
+  .thumb-img { width: 92px; height: 60px; }
+  .custom-thumbnails { gap: 12px; min-width: 200px; }
+}
+
+@media (max-width: 576px) {
+  /* On small screens make thumbnails horizontally scrollable and static (not absolutely centered) */
+  .custom-thumbnails-wrapper {
+    position: static;
+    transform: none;
+    bottom: auto;
+    left: auto;
+    margin: 8px 12px 0 12px;
+    width: calc(100% - 24px);
+    border-radius: 10px;
+    background: rgba(0,0,0,0.18);
+    padding: 8px 10px;
+    overflow: hidden;
+    display: block;
+  }
+  .custom-thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .custom-thumbnails::-webkit-scrollbar { height: 8px; }
+  .custom-thumbnails::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 8px; }
+  .thumb-img { width: 88px; height: 56px; flex: 0 0 auto; transform: none; }
+  .thumb-arrow { display: none; }
+}
+
+/* Make the main hero carousel full-bleed (edge-to-edge) */
+/* Place the main carousel absolutely inside the `#home` section so it can span edge-to-edge */
+#mainCarousel {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: calc(100vh - 64px); /* account for fixed navbar height */
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 0;
+}
+
+#mainCarousel .carousel-inner,
+#mainCarousel .carousel-item {
+  height: 100%;
+}
+
+#mainCarousel .carousel-item img {
+  height: 100%;
+  width: 100vw; /* ensure image spans viewport width */
+  object-fit: cover;
+  border-radius: 0; /* remove rounding on the image itself */
+  display: block;
 }
 
 /* Mini carousel (thumbnails) */
@@ -145,37 +230,40 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
   position: absolute;
   left: 50%;
   bottom: 32px;
   transform: translateX(-50%);
   z-index: 10;
-  background: rgba(0,0,0,0.4);
-  padding: 12px 24px;
-  border-radius: 18px;
+  background: rgba(0,0,0,0.35);
+  padding: 10px 18px;
+  border-radius: 14px;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
 }
 .custom-thumbnails {
   display: flex;
   align-items: center;
-  gap: 18px;
-  min-width: 360px;
-  max-width: 420px;
+  gap: 14px;
+  min-width: 260px;
+  max-width: 720px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .thumb-img {
-  width: 120px;
-  height: 80px;
+  width: 110px;
+  height: 70px;
   object-fit: cover;
-  border-radius: 12px;
-  border: 3px solid #fff;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 2px 0 #fff inset;
-  opacity: 0.7;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 2px 0 #fff inset;
+  opacity: 0.9;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s, border 0.3s;
-  transform: perspective(300px) rotateY(-18deg) scale(1);
+  transition: transform 0.24s, box-shadow 0.24s, opacity 0.24s, border 0.24s;
+  transform: perspective(300px) rotateY(-8deg) scale(1);
   background: #222;
-  display: none;
+  display: block;
 }
 .thumb-img.active {
   border-color: #ffd700;
@@ -285,6 +373,7 @@ html, body {
 .events-thumb {background: rgba(0,0,0,0.35); border: none;}
 .events-thumb .card-body {padding:12px}
 .events-thumb img {height:160px; object-fit:cover}
+.card-img-top { width: 100%; height: 160px; object-fit: cover; }
 .events-thumb .btn-outline-light {border-color: rgba(255,255,255,0.6); color: #fff}
 .events-thumb .btn-outline-light:hover {background: rgba(255,255,255,0.08)}
 

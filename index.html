@@ -13,18 +13,27 @@
 </head>
 <body>
 
-  <!-- Sticky Navbar -->
-  <nav id="navbar">
-  <div class="logo"><img src="images/logo.png" alt="Logo" style="max-height:52px; padding:4px 0; object-fit:contain; background:transparent; display:block;"></div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-  <li><a href="#Events">News & Events</a></li>
-  <li><a href="#activities">Activities</a></li>
-  <li><a href="#sab-members">SAB Members</a></li>
-  <li><a href="#consortium">Consortium</a></li>
-  <li><a href="#contact">Contact</a></li>
-    </ul>
+  <!-- Sticky Navbar (Bootstrap responsive) -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#home">
+        <img src="images/logo.png" alt="Logo" style="max-height:44px; object-fit:contain;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#Events">News & Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#activities">Activities</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sab-members">SAB Members</a></li>
+          <li class="nav-item"><a class="nav-link" href="#consortium">Consortium</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
   <!-- HOME: Main Carousel + Mini Carousel (Bootstrap) -->
@@ -90,7 +99,7 @@
         <div id="thumbsSlider" class="thumbs-slider">
           <div class="thumb-item">
             <div class="card events-thumb text-center mx-2">
-              <img src="images/wp1.jpg" class="card-img-top" alt="Thumb 1">
+              <img src="images/wp1.jpg" class="card-img-top" alt="Thumb 1" loading="lazy">
               <div class="card-body">
                 <p class="card-text">Short description for thumb 1.</p>
                 <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
@@ -99,7 +108,7 @@
           </div>
           <div class="thumb-item">
             <div class="card events-thumb text-center mx-2">
-              <img src="images/wp2.jpg" class="card-img-top" alt="Thumb 2">
+              <img src="images/wp2.jpg" class="card-img-top" alt="Thumb 2" loading="lazy">
               <div class="card-body">
                 <p class="card-text">Short description for thumb 2.</p>
                 <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
@@ -108,7 +117,7 @@
           </div>
           <div class="thumb-item">
             <div class="card events-thumb text-center mx-2">
-              <img src="images/wp3.jpg" class="card-img-top" alt="Thumb 3">
+              <img src="images/wp3.jpg" class="card-img-top" alt="Thumb 3" loading="lazy">
               <div class="card-body">
                 <p class="card-text">Short description for thumb 3.</p>
                 <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
@@ -117,7 +126,7 @@
           </div>
           <div class="thumb-item">
             <div class="card events-thumb text-center mx-2">
-              <img src="images/wp4.jpg" class="card-img-top" alt="Thumb 4">
+              <img src="images/wp4.jpg" class="card-img-top" alt="Thumb 4" loading="lazy">
               <div class="card-body">
                 <p class="card-text">Short description for thumb 4.</p>
                 <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
@@ -126,7 +135,7 @@
           </div>
           <div class="thumb-item">
             <div class="card events-thumb text-center mx-2">
-              <img src="images/wp5.jpg" class="card-img-top" alt="Thumb 5">
+              <img src="images/wp5.jpg" class="card-img-top" alt="Thumb 5" loading="lazy">
               <div class="card-body">
                 <p class="card-text">Short description for thumb 5.</p>
                 <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
@@ -135,7 +144,7 @@
           </div>
           <div class="thumb-item">
             <div class="card events-thumb text-center mx-2">
-              <img src="images/wp6.jpg" class="card-img-top" alt="Thumb 6">
+              <img src="images/wp6.jpg" class="card-img-top" alt="Thumb 6" loading="lazy">
               <div class="card-body">
                 <p class="card-text">Short description for thumb 6.</p>
                 <a href="#" class="btn btn-outline-light btn-sm">Learn more</a>
