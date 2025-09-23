@@ -1,0 +1,8 @@
+Task: Improve Events thumbnail slider styles
+- Update card background to darker translucent panel with subtle gradient
+- Increase image height on desktop, slightly larger cards
+- Improve typography: title/subtext sizes and colors
+- Add hover elevation and scale for better affordance
+- Ensure responsive sizes for mobile
+- Respect prefers-reduced-motion
+Status: in-progress
